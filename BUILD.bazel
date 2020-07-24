@@ -1,0 +1,27 @@
+load(":defs.bzl", "list_sources")
+
+proto_library(
+    name = "example_proto",
+    srcs = ["example.proto"],
+)
+
+java_proto_library(
+    name = "example_java_proto",
+    deps = [":example_proto"],
+)
+
+list_sources(
+    name = "example_java_proto_sources",
+    lib = ":example_java_proto",
+)
+
+java_library(
+    name = "example_java",
+    srcs = ["C.java"],
+    deps = [":example_java_proto"],
+)
+
+list_sources(
+    name = "example_java_sources",
+    lib = ":example_java",
+)
