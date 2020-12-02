@@ -1,0 +1,4 @@
+build:jdk15 --host_javabase=//:java_runtime
+build:jdk15 --javabase=//:java_runtime
+build:jdk15 --host_java_toolchain=//:java_toolchain
+build:jdk15 --java_toolchain=//:java_toolchain

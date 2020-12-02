@@ -1,0 +1,48 @@
+java_library(
+    name = "Anno",
+    srcs = ["Anno.java"],
+)
+
+java_plugin(
+    name = "Proc",
+    srcs = ["Proc.java"],
+    deps = [":Anno"],
+    processor_class = "ex.Proc",
+    generates_api = True,
+)
+
+java_library(
+    name = "C1",
+    srcs = ["C1.java"],
+    deps = [":Anno"],
+    plugins = [":Proc"],
+)
+
+java_library(
+    name = "C2",
+    srcs = ["C2.java"],
+    deps = [":C1"],
+)
+
+config_setting(
+    name = "mac",
+    values = {
+        "cpu": "darwin",
+    },
+)
+
+alias(
+    name = "java_runtime",
+    actual = select({
+        ":mac": "@jdk15_macos//:runtime",
+        "//conditions:default": "@jdk15_linux//:runtime",
+    }),
+)
+
+alias(
+    name = "java_toolchain",
+    actual = select({
+        ":mac": "@jdk15_remote_java_tools_darwin//:toolchain_jdk_15",
+        "//conditions:default": "@jdk15_remote_java_tools_linux//:toolchain_jdk_15",
+    }),
+)
