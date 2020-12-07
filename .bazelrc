@@ -2,3 +2,8 @@ build:jdk15 --host_javabase=//:java_runtime
 build:jdk15 --javabase=//:java_runtime
 build:jdk15 --host_java_toolchain=//:java_toolchain
 build:jdk15 --java_toolchain=//:java_toolchain
+
+build --host_javabase=@bazel_tools//tools/jdk:remote_jdk11
+build --javabase=@bazel_tools//tools/jdk:remote_jdk11
+build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
